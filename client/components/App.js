@@ -1,29 +1,21 @@
 import React from 'react';
-import socket from 'socket.io-client';
+import User from '../user'
 
 class App extends React.Component {
 
 	constructor(prop){
 		super(prop);
 		this.state = {
-			socket : socket,
-			name: 'olia'
-		}
-	}
-
-	componentDidMount(){
-
-        this.state.socket.connect().emit('create user')
-			.on('user created', (data) => {
-            this.setState({
-                name: data.username
-            });
-        })
+			data: 'olia'
+		};
+        new User((err, data) => this.setState({
+            data
+        }));
 	}
 
 	render() {
 		return (
-			<h1>{this.state.name}</h1>
+			<h1>{this.state.data}</h1>
 		);
 	}
 }
