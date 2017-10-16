@@ -1,23 +1,27 @@
 import React from 'react';
-import User from '../user'
+import Chat from './Chat';
+import Channels from './Channels';
+import {Switch, Route} from 'react-router-dom'
+import openSocket from 'socket.io-client';
 
 class App extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            socket: openSocket.connect()
+        }
+    }
 
-	constructor(prop){
-		super(prop);
-		this.state = {
-			data: 'olia'
-		};
-        new User((err, data) => this.setState({
-            data
-        }));
-	}
-
-	render() {
-		return (
-			<h1>{this.state.data}</h1>
-		);
-	}
+    render() {
+        const socketConnect = this.state.socket;
+        return (
+            <Switch>
+                <Route path="/chat" render={() => <Chat socket={socketConnect}/>} />
+                <Route path="/" render={() => <Channels socket={socketConnect}/>} />
+            </Switch>
+        );
+    }
 }
 
 export default App;

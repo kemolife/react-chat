@@ -25,8 +25,9 @@ let http = Server(app);
 let io = socket(http);
 let port = 3000;
 
+app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 http.listen(port, '127.0.0.1', () => console.info('Chat App listening on 127.0.0.1:'+port));
