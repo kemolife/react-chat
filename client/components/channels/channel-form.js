@@ -1,6 +1,7 @@
 import React from 'react';
 import ChannelsService from './../../services/channels';
-import User from './../../services/user'
+import User from './../../services/user';
+import createHistory from 'history/createBrowserHistory';
 
 export default class ChannelForm extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class ChannelForm extends React.Component {
             channelName: '',
             channelPass: '',
             user: new User(props.socket),
+            history : createHistory(),
             username: '',
             error: ''
         };
@@ -35,6 +37,7 @@ export default class ChannelForm extends React.Component {
             channel.joinedChannel(name, pass, (err, channel) => this.setState(
                 {'channelName': channel.name}
             ));
+            this.state.history.go(1)
         }else{
             this.setState({
                 error: 'Please check all fields'
@@ -49,7 +52,6 @@ export default class ChannelForm extends React.Component {
     }
 
     render() {
-        console.log(this.state.user);
         return (
             <div>
                 <h1>{this.state.user.name}</h1>
