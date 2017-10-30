@@ -1,19 +1,21 @@
 import React from 'react';
 import {Message, Text, Title, Users} from './chat/index'
+import User from "../services/user";
 
 class Chat extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            user: new User(props.socket),
+            user: props.location.state.user,
             username: ''
         };
     }
 
     render() {
-
-        const username = this.state.username;
+        console.log(this.state.user);
+        const username = this.state.user.username;
         return (
             <div className="row">
                 <div className="col-md-12">

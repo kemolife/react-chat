@@ -17,7 +17,7 @@ class App extends React.Component {
         const socketConnect = this.state.socket;
         return (
             <Switch>
-                <Route path="/chat" render={() => <Chat socket={socketConnect}/>} />
+                <Route path="/chat" component={Chat} />
                 <Route path="/" render={() => <Channels socket={socketConnect}/>} />
             </Switch>
         );
